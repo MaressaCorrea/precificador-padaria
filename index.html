@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Precificador Padaria</title>
+
+<style>
+    body{
+        font-family: Arial;
+        background:#f4f4f4;
+        padding:20px;
+        margin:0;
+    }
+
+    .card{
+        background:white;
+        padding:20px;
+        border-radius:12px;
+        margin-bottom:20px;
+        box-shadow:0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    h2{
+        margin-top:0;
+    }
+
+    input{
+        width:100%;
+        padding:12px;
+        margin-top:8px;
+        margin-bottom:12px;
+        border-radius:8px;
+        border:1px solid #ccc;
+        font-size:16px;
+        box-sizing:border-box;
+    }
+
+    button{
+        width:100%;
+        padding:14px;
+        border:none;
+        border-radius:8px;
+        background:#222;
+        color:white;
+        font-size:16px;
+        cursor:pointer;
+    }
+
+    button:hover{
+        opacity:0.9;
+    }
+
+    .resultado{
+        font-size:20px;
+        font-weight:bold;
+        margin-top:10px;
+    }
+</style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Ingrediente</h2>
+
+    <input type="text" id="nomeIngrediente" placeholder="Ex: Farinha">
+
+    <input type="number" id="precoIngrediente" placeholder="Preço pago Ex: 180">
+
+    <input type="number" id="quantidadeIngrediente" placeholder="Quantidade comprada Ex: 50">
+
+    <button onclick="calcularCustoKg()">
+        Calcular custo por KG
+    </button>
+
+    <div class="resultado" id="resultadoKg"></div>
+</div>
+
+<div class="card">
+    <h2>Receita</h2>
+
+    <input type="number" id="kgUsado" placeholder="KG usados na receita">
+
+    <input type="number" id="quantidadeProduzida" placeholder="Quantidade produzida">
+
+    <input type="number" id="margemLucro" placeholder="Margem de lucro %">
+
+    <button onclick="calcularPreco()">
+        Calcular preço
+    </button>
+
+    <div class="resultado" id="resultadoFinal"></div>
+</div>
+
+<script>
+
+let custoPorKg = 0;
+
+function calcularCustoKg(){
+
+    const preco = parseFloat(
+        document.getElementById("precoIngrediente").value
+    );
+
+    const quantidade = parseFloat(
+        document.getElementById("quantidadeIngrediente").value
+    );
+
+    custoPorKg = preco / quantidade;
+
+    document.getElementById("resultadoKg").innerHTML =
+        "Custo por KG: R$ " + custoPorKg.toFixed(2);
+}
+
+function calcularPreco(){
+
+    const kgUsado = parseFloat(
+        document.getElementById("kgUsado").value
+    );
+
+    const quantidadeProduzida = parseFloat(
+        document.getElementById("quantidadeProduzida").value
+    );
+
+    const margem = parseFloat(
+        document.getElementById("margemLucro").value
+    );
+
+    const custoReceita = custoPorKg * kgUsado;
+
+    const custoUnitario =
+        custoReceita / quantidadeProduzida;
+
+    const precoVenda =
+        custoUnitario * (1 + margem / 100);
+
+    document.getElementById("resultadoFinal").innerHTML =
+        `
+        Custo Receita: R$ ${custoReceita.toFixed(2)}<br><br>
+        Custo Unitário: R$ ${custoUnitario.toFixed(2)}<br><br>
+        Preço Sugerido: R$ ${precoVenda.toFixed(2)}
+        `;
+}
+
+</script>
+
+</body>
+</html>
