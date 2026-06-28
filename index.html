@@ -1,145 +1,522 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
 <title>Precificador Padaria</title>
 
 <style>
-    body{
-        font-family: Arial;
-        background:#f4f4f4;
-        padding:20px;
-        margin:0;
-    }
 
-    .card{
-        background:white;
-        padding:20px;
-        border-radius:12px;
-        margin-bottom:20px;
-        box-shadow:0 2px 8px rgba(0,0,0,0.1);
-    }
+body{
+    font-family: Arial;
+    background:#f4f4f4;
+    margin:0;
+    padding:20px;
+}
 
-    h2{
-        margin-top:0;
-    }
+.card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    margin-bottom:20px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
 
-    input{
-        width:100%;
-        padding:12px;
-        margin-top:8px;
-        margin-bottom:12px;
-        border-radius:8px;
-        border:1px solid #ccc;
-        font-size:16px;
-        box-sizing:border-box;
-    }
+h2{
+    margin-top:0;
+}
 
-    button{
-        width:100%;
-        padding:14px;
-        border:none;
-        border-radius:8px;
-        background:#222;
-        color:white;
-        font-size:16px;
-        cursor:pointer;
-    }
+input,
+select{
+    width:100%;
+    padding:12px;
+    margin-top:8px;
+    margin-bottom:12px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    font-size:16px;
+    box-sizing:border-box;
+}
 
-    button:hover{
-        opacity:0.9;
-    }
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:8px;
+    background:#222;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    margin-top:10px;
+}
 
-    .resultado{
-        font-size:20px;
-        font-weight:bold;
-        margin-top:10px;
-    }
+button:hover{
+    opacity:0.9;
+}
+
+.resultado{
+    font-size:18px;
+    font-weight:bold;
+    margin-top:15px;
+    line-height:1.8;
+}
+
+.itemReceita{
+    border:1px solid #ddd;
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:12px;
+    background:#fafafa;
+}
+
 </style>
+
 </head>
+
 <body>
 
 <div class="card">
-    <h2>Ingrediente</h2>
 
-    <input type="text" id="nomeIngrediente" placeholder="Ex: Farinha">
+    <h2>Cadastro de Ingredientes</h2>
 
-    <input type="number" id="precoIngrediente" placeholder="Preço pago Ex: 180">
+    <select id="nomeIngrediente">
 
-    <input type="number" id="quantidadeIngrediente" placeholder="Quantidade comprada Ex: 50">
+        <option value="">
+            Selecione um ingrediente
+        </option>
 
-    <button onclick="calcularCustoKg()">
-        Calcular custo por KG
+        <option value="Farinha de Trigo">
+            Farinha de Trigo
+        </option>
+
+        <option value="Farinha Integral">
+            Farinha Integral
+        </option>
+
+        <option value="Fermento Biológico">
+            Fermento Biológico
+        </option>
+
+        <option value="Fermento Químico">
+            Fermento Químico
+        </option>
+
+        <option value="Sal">
+            Sal
+        </option>
+
+        <option value="Açúcar">
+            Açúcar
+        </option>
+
+        <option value="Óleo">
+            Óleo
+        </option>
+
+        <option value="Leite">
+            Leite
+        </option>
+
+        <option value="Margarina">
+            Margarina
+        </option>
+
+        <option value="Manteiga">
+            Manteiga
+        </option>
+
+        <option value="Queijo Mussarela">
+            Queijo Mussarela
+        </option>
+
+        <option value="Presunto">
+            Presunto
+        </option>
+
+        <option value="Frango">
+            Frango
+        </option>
+
+        <option value="Carne Moída">
+            Carne Moída
+        </option>
+
+        <option value="Calabresa">
+            Calabresa
+        </option>
+
+        <option value="Requeijão">
+            Requeijão
+        </option>
+
+        <option value="Ovos">
+            Ovos
+        </option>
+
+        <option value="Cebola">
+            Cebola
+        </option>
+
+        <option value="Alho">
+            Alho
+        </option>
+
+        <option value="Tomate">
+            Tomate
+        </option>
+
+        <option value="Outro">
+            Outro...
+        </option>
+
+    </select>
+<select id="unidadeIngrediente">
+
+    <option value="kg">
+        Quilograma (kg)
+    </option>
+
+    <option value="g">
+        Grama (g)
+    </option>
+
+    <option value="L">
+        Litro (L)
+    </option>
+
+    <option value="ml">
+        Mililitro (ml)
+    </option>
+
+    <option value="un">
+        Unidade
+    </option>
+
+  
+</select>
+
+
+    <input
+        type="text"
+        id="ingredienteCustom"
+        placeholder="Digite ingrediente personalizado"
+        style="display:none;"
+    >
+    <input
+        type="number"
+        id="quantidadeIngrediente"
+        placeholder="Quantidade comprada"
+    >
+    <input
+        type="number"
+        id="precoIngrediente"
+        placeholder="Preço pago"
+    >
+
+
+    <button onclick="salvarIngrediente()">
+        Salvar Ingrediente
     </button>
 
-    <div class="resultado" id="resultadoKg"></div>
+    <div id="listaIngredientes"></div>
+
 </div>
 
 <div class="card">
+
     <h2>Receita</h2>
 
-    <input type="number" id="kgUsado" placeholder="KG usados na receita">
+    <div id="itensReceita"></div>
 
-    <input type="number" id="quantidadeProduzida" placeholder="Quantidade produzida">
-
-    <input type="number" id="margemLucro" placeholder="Margem de lucro %">
-
-    <button onclick="calcularPreco()">
-        Calcular preço
+    <button onclick="adicionarIngredienteReceita()">
+        + Adicionar Ingrediente
     </button>
 
-    <div class="resultado" id="resultadoFinal"></div>
+    <input
+        type="number"
+        id="quantidadeProduzida"
+        placeholder="Quantidade produzida"
+    >
+
+    <input
+        type="number"
+        id="margemLucro"
+        placeholder="Margem de lucro %"
+    >
+
+    <button onclick="calcularReceita()">
+        Calcular Receita
+    </button>
+
+    <div
+        class="resultado"
+        id="resultado"
+    ></div>
+
 </div>
 
 <script>
 
-let custoPorKg = 0;
+let ingredientes = [];
 
-function calcularCustoKg(){
+document
+.getElementById("nomeIngrediente")
+.addEventListener("change", function(){
+
+    const campo =
+        document.getElementById(
+            "ingredienteCustom"
+        );
+
+    if(this.value === "Outro"){
+
+        campo.style.display = "block";
+
+    }else{
+
+        campo.style.display = "none";
+
+    }
+
+});
+
+function salvarIngrediente(){
+
+    const nomeSelect =
+        document.getElementById(
+            "nomeIngrediente"
+        ).value;
+
+    const custom =
+        document.getElementById(
+            "ingredienteCustom"
+        ).value;
+
+    const nome =
+        nomeSelect === "Outro"
+        ? custom
+        : nomeSelect;
 
     const preco = parseFloat(
-        document.getElementById("precoIngrediente").value
+        document.getElementById(
+            "precoIngrediente"
+        ).value
     );
 
     const quantidade = parseFloat(
-        document.getElementById("quantidadeIngrediente").value
+        document.getElementById(
+            "quantidadeIngrediente"
+        ).value
     );
+	
+	const unidade =
+    document.getElementById(
+        "unidadeIngrediente"
+    ).value;
 
-    custoPorKg = preco / quantidade;
+    if(!nome || !preco || !quantidade){
 
-    document.getElementById("resultadoKg").innerHTML =
-        "Custo por KG: R$ " + custoPorKg.toFixed(2);
+        alert("Preencha todos os campos.");
+
+        return;
+    }
+
+    const custoKg = preco / quantidade;
+
+    ingredientes.push({
+		nome,
+		custoKg,
+		unidade
+	});
+
+    atualizarListaIngredientes();
+
+    limparCampos();
+
 }
 
-function calcularPreco(){
+function atualizarListaIngredientes(){
 
-    const kgUsado = parseFloat(
-        document.getElementById("kgUsado").value
-    );
+    const lista =
+        document.getElementById(
+            "listaIngredientes"
+        );
 
-    const quantidadeProduzida = parseFloat(
-        document.getElementById("quantidadeProduzida").value
-    );
+    lista.innerHTML = "";
 
-    const margem = parseFloat(
-        document.getElementById("margemLucro").value
-    );
+    ingredientes.forEach(ingrediente => {
 
-    const custoReceita = custoPorKg * kgUsado;
+        lista.innerHTML += `
+            <p>
+                ${ingrediente.nome}
+                -
+                R$ ${ingrediente.custoKg.toFixed(2)}/${ingrediente.unidade}
+            </p>
+        `;
+
+    });
+
+}
+
+function limparCampos(){
+
+    document.getElementById(
+        "precoIngrediente"
+    ).value = "";
+
+    document.getElementById(
+        "quantidadeIngrediente"
+    ).value = "";
+
+    document.getElementById(
+        "ingredienteCustom"
+    ).value = "";
+
+}
+
+function adicionarIngredienteReceita(){
+
+    if(ingredientes.length === 0){
+
+        alert(
+            "Cadastre ingredientes primeiro."
+        );
+
+        return;
+    }
+
+    const div =
+        document.createElement("div");
+
+    div.className = "itemReceita";
+
+    let options = "";
+
+    ingredientes.forEach((ingrediente, index) => {
+
+        options += `
+            <option value="${index}">
+                ${ingrediente.nome}
+            </option>
+        `;
+
+    });
+
+    div.innerHTML = `
+
+        <select class="ingredienteReceita">
+            ${options}
+        </select>
+
+        <input
+            type="number"
+            class="quantidadeReceita"
+            placeholder="Quantidade usada"
+        >
+
+    `;
+
+    document
+    .getElementById("itensReceita")
+    .appendChild(div);
+
+}
+
+function calcularReceita(){
+
+    const selects =
+        document.querySelectorAll(
+            ".ingredienteReceita"
+        );
+
+    const quantidades =
+        document.querySelectorAll(
+            ".quantidadeReceita"
+        );
+
+    const quantidadeProduzida =
+        parseFloat(
+            document.getElementById(
+                "quantidadeProduzida"
+            ).value
+        );
+
+    const margem =
+        parseFloat(
+            document.getElementById(
+                "margemLucro"
+            ).value
+        );
+
+    if(
+        selects.length === 0 ||
+        !quantidadeProduzida ||
+        !margem
+    ){
+
+        alert(
+            "Preencha todos os campos."
+        );
+
+        return;
+    }
+
+    let custoTotal = 0;
+
+    selects.forEach((select, index) => {
+
+        const ingrediente =
+            ingredientes[
+                select.value
+            ];
+
+        const quantidade =
+            parseFloat(
+                quantidades[index].value
+            );
+
+        if(quantidade){
+
+            custoTotal +=
+                ingrediente.custoKg *
+                quantidade;
+
+        }
+
+    });
 
     const custoUnitario =
-        custoReceita / quantidadeProduzida;
+        custoTotal /
+        quantidadeProduzida;
 
     const precoVenda =
-        custoUnitario * (1 + margem / 100);
+        custoUnitario *
+        (1 + margem / 100);
 
-    document.getElementById("resultadoFinal").innerHTML =
-        `
-        Custo Receita: R$ ${custoReceita.toFixed(2)}<br><br>
-        Custo Unitário: R$ ${custoUnitario.toFixed(2)}<br><br>
-        Preço Sugerido: R$ ${precoVenda.toFixed(2)}
-        `;
+    document.getElementById(
+        "resultado"
+    ).innerHTML = `
+
+        Custo Total:
+        R$ ${custoTotal.toFixed(2)}
+        <br><br>
+
+        Custo Unitário:
+        R$ ${custoUnitario.toFixed(2)}
+        <br><br>
+
+        Preço Sugerido:
+        R$ ${precoVenda.toFixed(2)}
+
+    `;
+
 }
 
 </script>
